@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #FFF4E5;
+  color: #5C4033;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #FFCB6B;
+  color: #5C4033;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.logo-img {
+  width: 50px; /* Ukuran gambar */
+  margin-right: 10px; /* Jarak antara gambar dan teks */
+}
+
+.nav a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  color: #5C4033;
+}
+
+.hero {
+  text-align: center;
+  padding: 2rem;
+  background-image: url('hundred-acre-wood.jpg');
+  background-size: cover;
+  color: #5C4033;;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+
+.cta-button {
+  padding: 0.7rem 1.5rem;
+  background-color: #FFCB6B;
+  border: none;
+  color: #5C4033;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.main-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.book-section {
+  margin-top: 2rem;
+}
+
+.book-cards {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.book-card {
+  background-color: #FFF4E5;
+  border: 1px solid #FFD27F;
+  padding: 1rem;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.book-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #FFCB6B;
+  color: #5C4033;
+  margin-top: 2rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff7e6;
+}
+
+.login-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.login-panel {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-body .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.login-body .logo img {
+  width: 60px;
+  height: auto;
+}
+
+.panel-title {
+  text-align: center;
+  font-size: 24px;
+  color: #8B4513;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.input-group-text {
+  background-color: #FFD700;
+  color: #8B4513;
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+}
+
+.form-control {
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: #8B4513;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #a0522d;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+  color: #8B4513;
+}
+
+.register-link a {
+  color: #FFD700;
+  text-decoration: none;
+}
+
