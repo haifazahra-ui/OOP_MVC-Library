@@ -11,23 +11,23 @@ if (!defined('SECURE_ACCESS')) {
         <img src="views/img/pooh.png" alt="d" class="logo-img"> Honey Tree Library
         </div>
         <nav class="nav">
-            <a href="#">Home</a>
-            <a href="#">Koleksi Buku</a>
-            <a href="#">Kategori Buku</a>
-            <a href="#">Acara</a>
-            <a href="#">Kontak</a>
+            <a href="login">Login</a>
+            <a href="register">Register</a>
+            <a href="/">Home</a>
+            <a href="#">Pengembalian</a>
+            <a href="membership">Membership</a>
         </nav>
     </header>
 
     <section class="hero">
         <h1>Selamat Datang di Perpustakaan Winnie the Pooh</h1>
         <p>Temukan koleksi buku terbaik dan nikmati petualangan di dunia Hundred Acre Wood.</p>
-        <button class="cta-button">Mulai Membaca</button>
+        <button class="cta-button"><a href="peminjaman">Mulai Meminjam</a></button>
     </section>
 
     <main class="main-content">
         <section class="book-section">
-            <h2>Koleksi Buku Terbaru</h2>
+            <h2>Koleksi Buku</h2>
             <div class="book-cards">
                 <div class="book-card">
                     <img src="views/img/bedtime.jpg" alt="Buku Winnie the Pooh">

@@ -34,4 +34,13 @@ class Book {
         $query = $pdo->query("SELECT * FROM books");
         return $query->fetchAll(PDO::FETCH_CLASS, 'Book');
     }
+    public static function getBookById($id) {
+        $books = self::getAllBooks(); // Ambil semua buku
+        foreach ($books as $book) {
+            if ($book->getId() == $id) {
+                return $book;
+            }
+        }
+        return null; // Jika tidak ada buku dengan ID itu
+    }
 }
