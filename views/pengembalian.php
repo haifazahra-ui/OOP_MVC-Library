@@ -1,202 +1,114 @@
 <?php
-
-if (!defined('SECURE_ACCESS')) {
-    die('Direct access not permitted');
-}
-
-$title = "Pengembalian Buku";
-
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $loan_id = (int)$_POST['loan_id'];
-    $return_date = trim($_POST['return_date']);
-
-    $conn = new mysqli('localhost', 'root', '', 'mylibrary'); 
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $sql = "SELECT return_date FROM book_loans WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $loan_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $loan = $result->fetch_assoc();
-        $expected_return_date = new DateTime($loan['return_date']);
-        $actual_return_date = new DateTime($return_date);
-
-        // Hitung keterlambatan dan denda
-        $late_days = max(0, $expected_return_date->diff($actual_return_date)->days);
-        $fine = $late_days * 5000; // Rp 5.000 per hari keterlambatan
-
-        $update_sql = "UPDATE book_loans SET actual_return_date = ?, fine = ? WHERE id = ?";
-        $update_stmt = $conn->prepare($update_sql);
-        $update_stmt->bind_param("sii", $return_date, $fine, $loan_id);
-
-        if ($update_stmt->execute()) {
-            echo "<div class='alert alert-success text-center'>";
-            echo "Pengembalian berhasil diproses! ";
-            if ($fine > 0) {
-                echo "<span style='color: red;'> Anda terlambat $late_days hari. Denda: Rp $fine</span>";
-            } else {
-                echo "Tidak ada denda.";
-            }
-            echo "</div>";
-        } else {
-            echo "<div class='alert alert-danger text-center'>";
-            echo "Terjadi kesalahan: " . $update_stmt->error;
-            echo "</div>";
-        }
-
-        $update_stmt->close();
-    } else {
-        echo "<div class='alert alert-danger text-center'>";
-        echo "ID Pinjaman tidak ditemukan.";
-        echo "</div>";
-    }
-
-    $stmt->close();
-    $conn->close();
+if(!isset($_SESSION['is_login'])) {
+    header("Location: /login");
+    exit();
 }
 ?>
 
-<style>
-    /* Tema Winnie the Pooh */
-    body {
-        background: url('assets/images/pooh-background.jpg') no-repeat center center fixed;
-        background-size: cover;
-        font-family: 'Fredoka One', cursive;
-        color: #5C4033;
-    }
-
-    .main-content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .login-panel {
-        background-color: rgba(255, 245, 204, 0.95); /* Kuning Pooh */
-        width: 100%;
-        max-width: 500px;
-        padding: 20px;
-        border-radius: 20px;
-        border: 3px solid #D2691E; /* Coklat Pooh */
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .login-body {
-        text-align: center;
-    }
-
-    .pooh-logo {
-        width: 120px;
-        margin-bottom: 15px;
-    }
-
-    .pooh-home-icon {
-        font-size: 24px;
-        color: #D2691E; /* Coklat Pooh */
-    }
-
-    .panel-title {
-        color: #B22222; /* Merah Pooh */
-        font-size: 28px;
-        margin-bottom: 20px;
-    }
-
-    .input-group {
-        margin-bottom: 20px;
-    }
-
-    .input-group-text {
-        background-color: #FFD700; /* Kuning Pooh */
-        border: none;
-        color: #5C4033;
-        font-size: 18px;
-    }
-
-    input.form-control {
-        border: 2px solid #FFD700;
-        border-left: none;
-        font-size: 16px;
-        color: #5C4033;
-    }
-
-    input.form-control:focus {
-        outline: none;
-        box-shadow: 0 0 5px #FFD700;
-    }
-
-    .btn-primary {
-        background-color: #D2691E; /* Coklat Pooh */
-        border: none;
-        font-size: 18px;
-        padding: 10px;
-        border-radius: 10px;
-        transition: background 0.3s ease-in-out;
-    }
-
-    .btn-primary:hover {
-        background-color: #8B4513;
-        cursor: pointer;
-    }
-
-    .form-center {
-        width: 100%;
-        max-width: 500px;
-        margin: 0 auto;
-    }
-
-    @media (max-width: 600px) {
-        .login-panel {
-            padding: 15px;
-            width: 90%;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengembalian Buku - Winnie the Pooh Theme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Background dan font */
+        body {
+            background-color: #fff8dc; /* Warna latar lembut */
+            color: #5C3C1D; /* Warna teks coklat */
+            font-family: 'Fredoka', sans-serif;
         }
-    }
-</style>
 
-<div class="main-content">
-    <div class="login-panel">
-        <div class="login-body">
-            <div class="top d-flex justify-content-between align-items-center">
-                <div class="logo">
-                    <img src="/views/img/pooh.png" alt="Logo Pooh" class="pooh-logo">
-                </div>
-                <a href="/"><i class="fa-duotone fa-house-chimney pooh-home-icon"></i></a>
+        h2 {
+            color: #C0392B; /* Warna merah khas Winnie the Pooh */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background-color: #ffeb99; /* Warna kuning pastel */
+            border: 2px solid #f7d794; /* Garis tepi kuning lembut */
+            border-radius: 15px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        /* Gaya alert */
+        .alert {
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        /* Tombol */
+        .btn-secondary {
+            background-color: #ffad60; /* Warna oranye pastel */
+            color: #5C3C1D;
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #ff8c42;
+            color: white;
+        }
+
+        /* Winnie the Pooh Icon */
+        .pooh-icon {
+            display: block;
+            margin: 0 auto;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <img src="/views/img/pooh.png" alt="Winnie the Pooh" class="pooh-icon">
+        <h2>Pengembalian Buku</h2>
+        
+        <?php if(isset($_SESSION['error'])): ?>
+            <div class="alert alert-danger">
+                <?= $_SESSION['error']; ?>
+                <?php unset($_SESSION['error']); ?>
             </div>
+        <?php endif; ?>
 
-            <div class="bottom">
-                <h3 class="panel-title text-center">Pengembalian Buku</h3>
-
-                <form method="POST" action="" class="form-center">
-                    <div class="input-group mb-20">
-                        <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
-                        <input
-                            type="number"
-                            class="form-control"
-                            placeholder="Buku Pinjaman"
-                            name="loan_id"
-                            required>
-                    </div>
-
-                    <!-- Tanggal Pengembalian -->
-                    <div class="input-group mb-20">
-                        <span class="input-group-text"><i class="fa-regular fa-calendar"></i></span>
-                        <input
-                            type="date"
-                            class="form-control"
-                            name="return_date"
-                            required>
-                    </div>
-
-                    <button class="btn btn-primary w-100" type="submit">Proses Pengembalian</button>
-                </form>
+        <?php if(isset($_SESSION['success'])): ?>
+            <div class="alert alert-success">
+                <?= $_SESSION['success']; ?>
+                <?php unset($_SESSION['success']); ?>
             </div>
+        <?php endif; ?>
+
+        <?php if(isset($_SESSION['warning'])): ?>
+            <div class="alert alert-warning">
+                <?= $_SESSION['warning']; ?>
+                <?php unset($_SESSION['warning']); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="text-center">
+            <a href="/book" class="btn btn-secondary">Kembali</a>
         </div>
     </div>
-</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -11,7 +11,6 @@ if(isset($_SESSION['is_login']) == false){
     <title>MEMBERSHIP | HONEY TREE LIBRARY</title>
     <link rel="stylesheet" href="/views/style.css">
     <style>
-        /* Styling khusus membership */
         body {
             background: url('assets/images/library-bg.jpg') no-repeat center center fixed;
             background-size: cover;

@@ -33,11 +33,18 @@ class AuthController extends Controller
                 $_SESSION["username"] = $username;
 
                 header("location: /register");
-                die();
+                exit();
             }
 
-            $user = new User($username, $password, 1);
-            $user->registerUser();
+            try {
+                $user = new User($username, $password, 1);
+                $user->registerUser();
+            } catch (Exception $e) {
+                error_log("Register Controller Error: " . $e->getMessage());
+                $_SESSION["error"] = "Terjadi kesalahan saat registrasi";
+                header("location: /register");
+                exit();
+            }
         }
         return self::view('views/register.php');
     }
@@ -45,6 +52,6 @@ class AuthController extends Controller
 
 if($uri == '/login'){
     return AuthController::login();
+} else if($uri == '/register'){
+    return AuthController::register();
 }
-
-AuthController::register();

@@ -12,9 +12,10 @@ if (!defined('SECURE_ACCESS')) {
         </div>
         <nav class="nav">
             <a href="login">Login</a>
-            <a href="register">Register</a>
             <a href="/">Home</a>
-            <a href="#">Pengembalian</a>
+            <a href="book">Book</a>
+            <a href="peminjaman">Peminjaman</a>
+            <a href="pengembalian">Pengembalian</a>
             <a href="membership">Membership</a>
         </nav>
     </header>
@@ -22,18 +23,24 @@ if (!defined('SECURE_ACCESS')) {
     <section class="hero">
         <h1>Selamat Datang di Perpustakaan Winnie the Pooh</h1>
         <p>Temukan koleksi buku terbaik dan nikmati petualangan di dunia Hundred Acre Wood.</p>
-        <button class="cta-button"><a href="peminjaman">Mulai Meminjam</a></button>
+        <button class="cta-button"><a href="book">Mulai Meminjam</a></button>
     </section>
 
     <main class="main-content">
         <section class="book-section">
             <h2>Koleksi Buku</h2>
-            <div class="book-cards">
+                <div class="book-cards">
                 <div class="book-card">
                     <img src="views/img/bedtime.jpg" alt="Buku Winnie the Pooh">
                     <h3>My Favourite Bedtime Storybook</h3>
                     <br>
                     <p>With six sweet stories, little readers can join their favourite friends from the Hundred-Acre Wood in this new bedtime storybook collection!</p>
+                </div>
+                <div class="book-card">
+                    <img src="views/img/classic collection.jpg" alt="Buku Winnie The Pooh">
+                    <h3>Disney: Classic Collection #15</h3>
+                    <br>
+                    <p>The friends in the Hundred-Acre Wood are embarking on an exciting adventure.</p>
                 </div>
                 <div class="book-card">
                     <img src="views/img/gift.jpg" alt="Buku Winnie The Pooh">
@@ -52,12 +59,6 @@ if (!defined('SECURE_ACCESS')) {
                     <h3>POOHS SECRET GARDEN</h3>
                     <br>
                     <p>Spring has sprung in the Hundred-Acre Wood and Winnie the Pooh is planting a garden.</p>
-                </div>
-                <div class="book-card">
-                    <img src="views/img/classic collection.jpg" alt="Buku Winnie The Pooh">
-                    <h3>Disney: Classic Collection #15</h3>
-                    <br>
-                    <p>The friends in the Hundred-Acre Wood are embarking on an exciting adventure.</p>
                 </div>
                 <br>
                 <div class="book-card">

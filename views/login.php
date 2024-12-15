@@ -6,7 +6,6 @@ $title = "LOGIN | HONEY TREE LIBRARY";
 ?>
 
 <style>
-    /* Tema Winnie the Pooh Fullscreen */
     @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
     * {
@@ -19,7 +18,7 @@ $title = "LOGIN | HONEY TREE LIBRARY";
         background: url('assets/images/pooh-background.jpg') no-repeat center center fixed;
         background-size: cover;
         font-family: "Fredoka One", cursive;
-        color: #5C4033; /* Coklat muda */
+        color: #5C4033;
         height: 100vh;
         display: flex;
         align-items: center;
@@ -27,12 +26,12 @@ $title = "LOGIN | HONEY TREE LIBRARY";
     }
 
     .main-content {
-        background: rgba(255, 245, 204, 0.95); /* Kuning madu semi transparan */
-        border: 3px solid #D2691E; /* Coklat Pooh */
+        background: rgba(255, 245, 204, 0.95);
+        border: 3px solid #D2691E;
         border-radius: 20px;
         padding: 30px;
         width: 100%;
-        max-width: 500px; /* Responsif */
+        max-width: 500px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         text-align: center;
         animation: fadeIn 1s ease-in-out;
@@ -50,7 +49,7 @@ $title = "LOGIN | HONEY TREE LIBRARY";
     }
 
     .panel-title {
-        color: #B22222; /* Warna merah Pooh */
+        color: #B22222;
         font-size: 28px;
         margin-bottom: 15px;
     }
@@ -60,7 +59,7 @@ $title = "LOGIN | HONEY TREE LIBRARY";
     }
 
     .input-group-text {
-        background-color: #FFD700; /* Kuning Pooh */
+        background-color: #FFD700;
         border: none;
         color: #5C4033;
         font-size: 18px;
@@ -79,7 +78,7 @@ $title = "LOGIN | HONEY TREE LIBRARY";
     }
 
     .btn-primary {
-        background-color: #D2691E; /* Coklat Pooh */
+        background-color: #D2691E;
         border: none;
         font-size: 18px;
         padding: 10px;
@@ -93,17 +92,16 @@ $title = "LOGIN | HONEY TREE LIBRARY";
     }
 
     a {
-        color: #B22222; /* Merah Pooh */
+        color: #B22222;
         text-decoration: none;
         font-size: 14px;
     }
 
     a:hover {
-        color: #FF4500; /* Oranye Pooh */
+        color: #FF4500;
         text-decoration: underline;
     }
 
-    /* Dekorasi Logo dan Pooh */
     .top .logo img {
         width: 120px;
         margin-bottom: 10px;
@@ -117,7 +115,6 @@ $title = "LOGIN | HONEY TREE LIBRARY";
         height: auto;
     }
 
-    /* Responsif */
     @media (max-width: 600px) {
         .main-content {
             padding: 20px;

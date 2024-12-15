@@ -27,8 +27,8 @@ body {
 }
 
 .logo-img {
-  width: 50px; /* Ukuran gambar */
-  margin-right: 10px; /* Jarak antara gambar dan teks */
+  width: 50px; 
+  margin-right: 10px;
 }
 
 .nav a {
